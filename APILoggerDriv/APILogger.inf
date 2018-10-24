@@ -1,5 +1,5 @@
 ;
-; KMDFAPILogger.inf
+; APILogger.inf
 ;
 
 [Version]
@@ -7,7 +7,7 @@ Signature="$WINDOWS NT$"
 Class=Sample ; TODO: edit Class
 ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
 Provider=%ManufacturerName%
-CatalogFile=KMDFAPILogger.cat
+CatalogFile=APILogger.cat
 DriverVer= ; TODO: set DriverVer in stampinf property pages
 
 [DestinationDirs]
@@ -27,7 +27,7 @@ HKR,,Icon,,-5
 1 = %DiskName%,,,""
 
 [SourceDisksFiles]
-KMDFAPILogger.sys  = 1,,
+APILoggerDriv.sys  = 1,,
 WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
 
 ;*****************************************
@@ -38,49 +38,49 @@ WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with
 %ManufacturerName%=Standard,NT$ARCH$
 
 [Standard.NT$ARCH$]
-%KMDFAPILogger.DeviceDesc%=KMDFAPILogger_Device, Root\KMDFAPILogger ; TODO: edit hw-id
+%APILogger.DeviceDesc%=APILogger_Device, Root\APILogger ; TODO: edit hw-id
 
-[KMDFAPILogger_Device.NT]
+[APILogger_Device.NT]
 CopyFiles=Drivers_Dir
 
 [Drivers_Dir]
-KMDFAPILogger.sys
+APILoggerDriv.sys
 
 ;-------------- Service installation
-[KMDFAPILogger_Device.NT.Services]
-AddService = KMDFAPILogger,%SPSVCINST_ASSOCSERVICE%, KMDFAPILogger_Service_Inst
+[APILogger_Device.NT.Services]
+AddService = APILogger,%SPSVCINST_ASSOCSERVICE%, APILogger_Service_Inst
 
-; -------------- KMDFAPILogger driver install sections
-[KMDFAPILogger_Service_Inst]
-DisplayName    = %KMDFAPILogger.SVCDESC%
+; -------------- APILogger driver install sections
+[APILogger_Service_Inst]
+DisplayName    = %APILogger.SVCDESC%
 ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
 StartType      = 3               ; SERVICE_DEMAND_START
 ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
-ServiceBinary  = %12%\KMDFAPILogger.sys
+ServiceBinary  = %12%\APILoggerDriv.sys
 
 ;
-;--- KMDFAPILogger_Device Coinstaller installation ------
+;--- APILogger_Device Coinstaller installation ------
 ;
 
-[KMDFAPILogger_Device.NT.CoInstallers]
-AddReg=KMDFAPILogger_Device_CoInstaller_AddReg
-CopyFiles=KMDFAPILogger_Device_CoInstaller_CopyFiles
+[APILogger_Device.NT.CoInstallers]
+AddReg=APILogger_Device_CoInstaller_AddReg
+CopyFiles=APILogger_Device_CoInstaller_CopyFiles
 
-[KMDFAPILogger_Device_CoInstaller_AddReg]
+[APILogger_Device_CoInstaller_AddReg]
 HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
 
-[KMDFAPILogger_Device_CoInstaller_CopyFiles]
+[APILogger_Device_CoInstaller_CopyFiles]
 WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
 
-[KMDFAPILogger_Device.NT.Wdf]
-KmdfService =  KMDFAPILogger, KMDFAPILogger_wdfsect
-[KMDFAPILogger_wdfsect]
+[APILogger_Device.NT.Wdf]
+KmdfService =  APILogger, APILogger_wdfsect
+[APILogger_wdfsect]
 KmdfLibraryVersion = $KMDFVERSION$
 
 [Strings]
 SPSVCINST_ASSOCSERVICE= 0x00000002
 ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
 ClassName="Samples" ; TODO: edit ClassName
-DiskName = "KMDFAPILogger Installation Disk"
-KMDFAPILogger.DeviceDesc = "KMDFAPILogger Device"
-KMDFAPILogger.SVCDESC = "KMDFAPILogger Service"
+DiskName = "APILogger Installation Disk"
+APILogger.DeviceDesc = "APILogger Device"
+APILogger.SVCDESC = "APILogger Service"
