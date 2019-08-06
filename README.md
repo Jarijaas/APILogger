@@ -1,3 +1,5 @@
+This project was done for university course and is unmaintained.
+
 # Introduction
 
 The goal of this project is to provide API usage information about the processes under observation that is written down on a disk. Tools that are somewhat similar are SysInternals Process Monitor and the Rohitab APIMonitor. As a final project work for the OUSPG Computer Security course, I implemented the dll code injection mechanism into the processes and hooking of imported API functions in the target processes. Kernel driver is used to inject the dll and the dll does API hooking. The API function calls are logged into a separate log file for each process. I also looked into how Win32 API functions could be hooked in the kernel.
